@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 from clarifai.rest import ClarifaiApp
 
@@ -13,6 +13,10 @@ def get_concepts(image):
         response = model.predict_by_filename(image)
     concepts = response['outputs'][0]['data']['concepts']
     return [{c['name']: c['value']} for c in concepts]
+
+
+def list_concepts(image):
+    return [list(d)[0] for d in get_concepts(image)]
 
 
 def is_pic_of(image_url, thing):
