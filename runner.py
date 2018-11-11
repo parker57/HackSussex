@@ -4,8 +4,11 @@ from clarifairy import *
 from file_crawler import *
 
 images = disk_images(sys.argv[1])
+print(images)
 
 tags = sys.argv[2:]
+print(tags)
+input()
 
 matches = []
 

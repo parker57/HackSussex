@@ -1,8 +1,23 @@
 #!/usr/bin/python3
 
-from clarifai.rest import ClarifaiApp
+#from clarifai.rest import ClarifaiApp
 
-app = ClarifaiApp(api_key='57ab074b98b3476c8fcc2b4c3ab95a56')
+#new key: 4c7f557436744091a230a2b4675324b0
+
+def validate_api_key(api_key):
+    """Check that an API key is valid, if yes return the app."""
+    try:
+        from clarifai.rest import ClarifaiApp, ApiError
+        app = ClarifaiApp(api_key=api_key)
+        return app
+    except ApiError as exc:
+        error = json.loads(exc.response.content)
+        _LOGGER.error(
+            "%s error: %s", CLASSIFIER, error['status']['details'])
+        return None
+
+
+app = validate_api_key(api_key='4c7f557436744091a230a2b4675324b0')
 model = app.public_models.general_model
 
 
@@ -22,4 +37,8 @@ def list_concepts(image):
 def is_pic_of(image_url, thing):
     table = get_concepts(image_url)
     return True if (thing in [list(d)[0] for d in table]) else False
+
+
+print(get_concepts('Donkey.jpg'))
+
 
