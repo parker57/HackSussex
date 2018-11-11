@@ -17,7 +17,7 @@ def validate_api_key(api_key):
         return None
 
 
-app = validate_api_key(api_key='4c7f557436744091a230a2b4675324b0')
+app = validate_api_key(api_key='d1e1cf2d912445b5a155f0eb4f8d83ab')
 model = app.public_models.general_model
 
 
@@ -37,8 +37,5 @@ def list_concepts(image):
 def is_pic_of(image_url, thing):
     table = get_concepts(image_url)
     return True if (thing in [list(d)[0] for d in table]) else False
-
-
-print(get_concepts('Donkey.jpg'))
 
 

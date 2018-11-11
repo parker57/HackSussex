@@ -4,16 +4,15 @@ from clarifairy import *
 from file_crawler import *
 
 images = disk_images(sys.argv[1])
-print(images)
+#print(images)
 
 tags = sys.argv[2:]
-print(tags)
-input()
 
 matches = []
 
 for image in images:
     if len([c for c in list_concepts(image) if c in tags]):
-        matches.append(image)
+        if image not in matches:
+            matches.append(image)
+            print(image)
 
-print(list(set(matches)))
